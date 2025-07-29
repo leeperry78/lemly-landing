@@ -555,6 +555,274 @@
       }
     }
   </style>
+  <style>
+    .brand-strip-container h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #fff, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: #aaa;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .brand-strip-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 2rem 0;
+      margin: 2rem 0;
+      background: transparent;
+    }
+
+    .gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* background: linear-gradient(90deg,
+          rgba(15, 15, 15, 1) 0%,
+          rgba(15, 15, 15, 0.027) 10%,
+          rgba(15, 15, 15, 0.072) 90%,
+          rgba(15, 15, 15, 0.493) 100%); */
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .brand-strip {
+      display: flex;
+      width: 200%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .brand-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      padding: 1.5rem;
+      margin: 0 1rem;
+      border-radius: 16px;
+      background: rgba(30, 30, 30, 0.7);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-item:hover {
+      transform: translateY(-10px);
+      background: rgba(40, 40, 40, 0.8);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .brand-item:hover .brand-icon {
+      transform: scale(1.15);
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #f0f0f0;
+      letter-spacing: 0.5px;
+    }
+ 
+    .facebook .brand-icon {
+      color: #fff;
+    }
+
+    .instagram .brand-icon {
+      color: #fff;
+    }
+
+    .whatsapp .brand-icon {
+      color: #fff;
+    }
+
+    .tiktok .brand-icon {
+      color: #fff;
+    }
+
+    .twitter .brand-icon {
+      color: #fff;
+    }
+
+    .linkedin .brand-icon {
+      color: #fff;
+    }
+
+    .pinterest .brand-icon {
+      color: #fff;
+    }
+
+    .snapchat .brand-icon {
+      color: #fff;
+    }
+
+    .youtube .brand-icon {
+      color: #fff;
+    }
+
+    .discord .brand-icon {
+      color: #fff;
+    }
+
+    .brand-item:hover .facebook .brand-icon {
+      color: #1877F2;
+    }
+
+    .brand-item:hover .instagram .brand-icon {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-item:hover .whatsapp .brand-icon {
+      color: #25D366;
+    }
+
+    .brand-item:hover .tiktok .brand-icon {
+      color: #000;
+    }
+
+    .brand-item:hover .twitter .brand-icon {
+      color: #1DA1F2;
+    }
+
+    .brand-item:hover .linkedin .brand-icon {
+      color: #0A66C2;
+    }
+
+    .brand-item:hover .pinterest .brand-icon {
+      color: #BD081C;
+    }
+
+    .brand-item:hover .snapchat .brand-icon {
+      color: #FFFC00;
+    }
+
+    .brand-item:hover .youtube .brand-icon {
+      color: #FF0000;
+    }
+
+    .brand-item:hover .discord .brand-icon {
+      color: #5865F2;
+    }
+
+    .brand-strip img {
+      height: 50px;
+      width: auto; 
+      margin-left: 70px;
+      object-fit: cover; 
+      padding: 1px;
+    }
+ 
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .highlight {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .brand-item {
+        width: 160px;
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .brand-item {
+        width: 140px;
+        padding: 1rem;
+      }
+
+      .brand-icon {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-strip-container {
+        border-radius: 12px;
+      }
+
+      .brand-item {
+        width: 120px;
+        margin: 0 0.5rem;
+        padding: 0.8rem;
+      }
+
+      .brand-icon {
+        font-size: 2.5rem;
+      }
+
+      .brand-name {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .brand-item {
+        width: 100px;
+        padding: 0.6rem;
+      }
+
+      .brand-icon {
+        font-size: 2rem;
+      }
+
+      .brand-name {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 
 <body class="antialiased">
@@ -606,7 +874,44 @@
     </div>
   </section>
 
-  <!-- Scroll Animation Sections -->
+  <center>
+    <div class="brand-strip-container">
+      <div class="gradient-overlay"></div>
+      <div class="brand-strip"> 
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png"/>
+         
+
+        
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png"/>
+         
+
+
+        
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png"/>
+         
+      </div>
+    </div>
+  </center>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(() => {
+        document.querySelector('.brand-strip').style.animation = 'scroll 30s linear infinite';
+      }, 500);
+    });
+  </script>
+
   <div id="how-it-works" class="scroll-section">
     <div class="content">
       <div class="flex flex-col lg:flex-row-reverse items-center gap-16">
@@ -678,9 +983,9 @@
             </li>
           </ul>
         </div>
-        <div class="flex-1"> 
-                <video style="padding-top: 1cm; width: 90vw;" src="/v1.mp4" autoplay loop muted></video>  
-             
+        <div class="flex-1">
+          <video style="padding-top: 1cm; width: 90vw;" src="/v1.mp4" autoplay loop muted></video>
+
         </div>
       </div>
     </div>
@@ -773,7 +1078,7 @@
       <div class="checkout-layer p-8 md:p-16">
         <div class="flex flex-col lg:flex-row gap-12 items-center">
           <div class="flex-1">
-          <h2 class="text-4xl md:text-5xl font-bold mb-6 font-manrope">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 font-manrope">
               No App. No Login. Just One Link.
             </h2>
             <p class="text-lg text-gray-700 mb-8 font-inter">
@@ -1100,10 +1405,10 @@
         </div>
       </div>
 
-    <div class="section-divider" style="height: 0.6px; margin-top: 2rem; width: 100%;"></div>
-    <div class="mt-7 pt-8 text-center text-sm">
-      <p>© Lemly 2025. All rights reserved.</p>
-    </div>
+      <div class="section-divider" style="height: 0.6px; margin-top: 2rem; width: 100%;"></div>
+      <div class="mt-7 pt-8 text-center text-sm">
+        <p>© Lemly 2025. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
@@ -1130,13 +1435,13 @@
       const footer = document.querySelector('footer');
       const footerTop = footer.getBoundingClientRect().top;
       const scrollIndicator = document.querySelector('.scroll-indicator');
-      
+
       // Show dots between hero section and footer
       if (window.scrollY > 600) {
         dots.forEach((dot) => {
           dot.style.display = "block";
         });
-        
+
         // Only hide when footer is in view
         if (footerTop < window.innerHeight) {
           scrollIndicator.style.opacity = '0';
