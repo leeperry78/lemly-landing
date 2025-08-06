@@ -98,23 +98,323 @@
     .phone-mockup {
       position: relative;
       width: 300px;
-      height: 600px;
+      height: 630px;
       border-radius: 40px;
-      background: #111111;
-      /* Matte Black */
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, #213242, #131d27);
+      box-shadow:
+        0 60px 120px -20px rgba(0, 0, 0, 0.6),
+        0 40px 70px -30px rgba(0, 0, 0, 0.5),
+        inset 0 -3px 10px rgba(255, 255, 255, 0.1);
       overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 0;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transform: rotateY(-5deg) rotateX(2deg);
+      transition: all 0.3s ease;
+    }
+
+    .phone-mockup:hover {
+      transform: rotateY(-8deg) rotateX(4deg) scale(1.02);
+    }
+
+    .phone-mockup::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 40px;
+      background: linear-gradient(45deg,
+          rgba(120, 155, 190, 0.05) 0%,
+          rgba(120, 155, 190, 0) 40%,
+          rgba(120, 155, 190, 0) 60%,
+          rgba(120, 155, 190, 0.05) 100%);
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+
+    .phone-frame {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 38px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+        inset 0 0 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 38px;
+      background: linear-gradient(to right,
+          rgba(120, 155, 190, 0.05),
+          rgba(255, 255, 255, 0));
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.3;
     }
 
     .phone-screen {
       position: absolute;
-      top: 20px;
-      left: 10px;
-      width: 280px;
-      height: 560px;
-      border-radius: 30px;
-      background: white;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 36px;
+      background: #000;
       overflow: hidden;
+      z-index: 2;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .phone-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg,
+          rgba(255, 255, 255, 0.03) 0%,
+          rgba(255, 255, 255, 0) 30%,
+          rgba(0, 0, 0, 0.1) 70%,
+          rgba(0, 0, 0, 0.2) 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .phone-reflection {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to bottom,
+          rgba(255, 255, 255, 0.08) 0%,
+          rgba(255, 255, 255, 0.03) 30%,
+          rgba(255, 255, 255, 0) 100%);
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0.3;
+      border-top-left-radius: 36px;
+      border-top-right-radius: 36px;
+    }
+
+    .phone-status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .phone-time {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .phone-status-icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .status-icon {
+      width: 16px;
+      height: 16px;
+      position: relative;
+    }
+
+    .status-icon.battery::before {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 70%;
+      background: #4caf50;
+      top: 15%;
+      left: 10%;
+      border-radius: 1px;
+    }
+
+    .status-icon.battery::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #fff;
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+
+    .status-icon.wifi {
+      transform: rotate(45deg);
+    }
+
+    .status-icon.wifi::before {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      border-top-right-radius: 8px;
+      top: 20%;
+      left: 20%;
+    }
+
+    .status-icon.signal::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .status-icon.signal::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 5px;
+      background: #fff;
+      bottom: 0;
+      left: 0;
+      box-shadow:
+        5px -2px 0 #fff,
+        10px -4px 0 #fff,
+        15px -6px 0 #fff;
+    }
+
+    .phone-camera-hole {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border-radius: 50%;
+      z-index: 11;
+      box-shadow:
+        0 0 0 2px rgba(0, 0, 0, 0.9),
+        inset 0 0 0 1px rgba(60, 90, 120, 0.3),
+        inset 0 0 3px rgba(0, 0, 0, 0.8);
+      pointer-events: none;
+    }
+
+    .phone-camera-hole::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(0, 70, 180, 0.6);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .phone-camera-hole::after {
+      content: '';
+      position: absolute;
+      width: 1.5px;
+      height: 1.5px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      top: 30%;
+      left: 30%;
+    }
+
+    .phone-button {
+      position: absolute;
+      width: 3px;
+      height: 45px;
+      background: linear-gradient(to right, #111920, #213242);
+      border-radius: 3px;
+      box-shadow:
+        inset -1px 0 1px rgba(255, 255, 255, 0.1),
+        0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .phone-button.volume-up {
+      right: -3px;
+      top: 130px;
+    }
+
+    .phone-button.volume-down {
+      right: -3px;
+      top: 190px;
+    }
+
+    .phone-button.power {
+      right: -3px;
+      top: 70px;
+    }
+
+    .phone-nav-buttons {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-button {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .nav-button::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-button.home {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-button.back {
+      transform: rotate(45deg);
+      border-radius: 0;
+      border-right: none;
+      border-bottom: none;
+      width: 15px;
+      height: 15px;
     }
 
     .floating-widget {
@@ -192,6 +492,11 @@
       /* Keep black when scrolled against white background */
     }
 
+    /* Ensure CTA button text stays white when scrolled */
+    .sticky-nav.scrolled .cta-button {
+      color: white;
+    }
+
     .sticky-nav.scrolled .text-white {
       color: #f5f5f5;
     }
@@ -200,6 +505,10 @@
       border: 1px solid #e5e5e5;
       border-radius: 16px;
       transition: all 0.3s ease;
+    }
+
+    .sticky-nav .cta-button {
+      color: white;
     }
 
     .pricing-card:hover {
@@ -229,13 +538,27 @@
       }
 
       .phone-mockup {
-        width: 250px;
-        height: 500px;
+        width: 260px;
+        height: 520px;
+      }
+
+      .phone-frame {
+        border-radius: 34px;
       }
 
       .phone-screen {
-        width: 230px;
-        height: 460px;
+        border-radius: 32px;
+      }
+
+      .phone-reflection {
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+      }
+
+      .phone-camera-hole {
+        width: 8px;
+        height: 8px;
+        top: 12px;
       }
     }
 
@@ -459,8 +782,8 @@
       justify-content: center;
       overflow: hidden;
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .scroll-section.active {
@@ -482,7 +805,8 @@
     .scroll-section:nth-child(even) {
       background-color: #f5f5f5;
     }
-/* 
+
+    /* 
     .scroll-section h2 {
       font-size: clamp(2.5rem, 7vw, 4rem);
       margin-bottom: 1.5rem;
@@ -497,7 +821,7 @@
       left: 0;
       width: 60px;
       height: 4px;
-      background: linear-gradient(90deg, #111111, #a9a9a9);
+      background: linear-gradient(90deg, #111111, #444444);
     }
 
     .scroll-section p {
@@ -837,9 +1161,9 @@
     }
 
     .feature-container {
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
 
     .feature-container.show {
@@ -852,7 +1176,7 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       transform: scale(0.95);
     }
 
@@ -861,10 +1185,10 @@
     }
 
     .feature-content {
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      transition-delay: 0.2s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-delay: 0.1s;
       opacity: 0;
-      transform: translateX(30px);
+      transform: translateX(20px);
     }
 
     .feature-content.show {
@@ -965,15 +1289,234 @@
       animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
+    /* Additional hover animations */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+
+    .hover-glow {
+      transition: box-shadow 0.3s ease;
+    }
+
+    .hover-glow:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Staggered animations */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .stagger-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Button animations */
+    .btn-pulse {
+      position: relative;
+    }
+
+    .btn-pulse::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: inherit;
+      border-radius: inherit;
+      z-index: -1;
+      animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+      }
+
+      80%,
+      100% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    /* Floating animation */
+    .floating {
+      animation: floating 3s ease infinite;
+      transform-origin: center center;
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Shine effect */
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+
+      0%,
+      100% {
+        left: -75%;
+      }
+
+      50% {
+        left: 125%;
+      }
+    }
+
+    /* Scroll-up animations */
+    .scroll-down-anim {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s ease-out;
+    }
+
+    .scroll-down-anim.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Fade-in animations */
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .fade-in.active {
+      opacity: 1;
+    }
+
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-out;
+      transform: translateY(15px);
+      transition: all 0.4s ease-out;
     }
 
     .scroll-reveal.active {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Text glow effect */
+    .text-glow {
+      text-shadow: 0 0 10px rgba(50, 50, 50, 0.5);
+      transition: text-shadow 0.3s ease;
+    }
+
+    .text-glow:hover {
+      text-shadow: 0 0 15px rgba(30, 30, 30, 0.8);
+    }
+
+    /* Parallax background */
+    .parallax-bg {
+      position: absolute;
+      width: 100%;
+      height: 120%;
+      top: -10%;
+      left: 0;
+      z-index: -1;
+      opacity: 0.5;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(20, 20, 20, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(40, 40, 40, 0.1) 0%, transparent 50%);
+      transform: translateY(0);
+      transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    /* Enhanced CTA buttons */
+    .cta-button {
+      position: relative;
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #333333, #111111);
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent);
+      transition: left 0.7s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.6);
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:active {
+      transform: translateY(1px);
+    }
+
+    .cta-button.bg-white {
+      background: linear-gradient(135deg, #ffffff, #dddddd);
+      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button.bg-white:hover {
+      box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
@@ -982,17 +1525,32 @@
   <header class="sticky-nav w-full z-50 py-0.5 px-6">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center">
-        <h1 class="text-2xl font-extrabold italic font-inter">Lemly</h1><span
+        <h1 class="text-2xl font-extrabold italic font-inter text-glow">Lemly</h1><span
           class="text-5xl mb-4 text-blue-600">.</span>
         <nav class="hidden md:flex ml-24 space-x-12 items-center">
-          <a href="#how-it-works" class="hover:text-lemly-grey transition">How It Works</a>
-          <a href="#the-card" class="hover:text-lemly-grey transition">The Card</a>
-          <a href="#pricing" class="hover:text-lemly-grey transition">Pricing</a>
-          <a href="#faq" class="hover:text-lemly-grey transition">FAQ</a>
+          <a href="#how-it-works" class="hover:text-lemly-grey transition relative overflow-hidden group">
+            How It Works
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-lemly-dark transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#the-card" class="hover:text-lemly-grey transition relative overflow-hidden group">
+            The Card
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-lemly-dark transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#pricing" class="hover:text-lemly-grey transition relative overflow-hidden group">
+            Pricing
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-lemly-dark transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#faq" class="hover:text-lemly-grey transition relative overflow-hidden group">
+            FAQ
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-lemly-dark transition-all duration-300 group-hover:w-full"></span>
+          </a>
         </nav>
       </div>
-      <a href="#pricing"
-        class="bg-lemly-dark text-white px-6 py-2 rounded-full font-medium transition hover:bg-gray-800">
+      <a href="#pricing" class="cta-button">
         Get Early Access
       </a>
     </div>
@@ -1001,12 +1559,15 @@
     <!-- Image as a tag instead of background -->
     <img src="/bg.png" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
 
+    <!-- Parallax background effect -->
+    <div class="parallax-bg"></div>
+
     <!-- White overlay instead of black -->
     <div class="absolute inset-0"></div>
 
     <div class="relative h-full max-w-7xl mx-auto flex items-center justify-start z-10">
       <div class="text-left px-6 max-w-2xl">
-        <h1 class="text-5xl md:text-6xl font-bold text-lemly-dark mb-6 font-manrope">
+        <h1 class="text-5xl md:text-6xl font-bold text-lemly-dark mb-6 font-manrope text-glow">
           Sell Live from Any Store. Instantly.
         </h1>
         <p class="text-xl md:text-2xl text-gray-700 mb-10 font-inter">
@@ -1016,8 +1577,7 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-start">
           <input type="email" placeholder="Enter your email"
             class="px-6 py-4 rounded-full bg-lemly-dark/10 backdrop-blur-md text-lemly-dark placeholder-lemly-dark/70 focus:outline-none focus:ring-2 focus:ring-lemly-dark flex-grow" />
-          <button
-            class="bg-lemly-dark text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition whitespace-nowrap">
+          <button class="cta-button whitespace-nowrap" aria-label="Get Early Access">
             Get Early Access →
           </button>
         </div>
@@ -1106,155 +1666,168 @@
           </div>
         </div>
         <div class="flex-1">
-          <div class="phone-mockup mx-auto">
-            <div class="phone-screen">
-              <img src="/mimg.jpg" alt="Lemly Widget Preview" class="p-2 w-full h-full object-cover rounded-lg" />
+          <div class="phone-mockup mx-auto floating">
+            <div class="phone-frame">
+              <div class="phone-camera-hole"></div>
+              <div class="phone-screen">
+                <div class="phone-reflection"></div>
+                <video src="/s1.mp4" alt="Lemly Widget Preview" class="w-full h-full object-cover" autoplay loop
+                  muted></video>
+              </div>
             </div>
+            <div class="phone-button volume-up"></div>
+            <div class="phone-button volume-down"></div>
+            <div class="phone-button power"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-<!-- Unified Feature Sections -->
-<section class="py-20 bg-lemly-light-grey overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center max-w-3xl mx-auto mb-20 scroll-reveal">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6 font-manrope text-lemly-dark">
-        Turn Your Passion for Shopping into a Professional Business
-      </h2>
-      <p class="text-lg text-gray-700 font-inter">
-        Lemly empowers you to earn by doing what you love. It gives you the
-        power to run your business legally and efficiently from anywhere.
-      </p>
-    </div>
-    
-    <div class="relative">
-      <!-- Continuous vertical line connecting all sections -->
-      <div
-        class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-lemly-card hidden md:block"
-        aria-hidden="true">
+  <!-- Unified Feature Sections -->
+  <section class="py-20 bg-lemly-light-grey overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-20 scroll-reveal">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-manrope text-lemly-dark">
+          Turn Your Passion for Shopping into a Professional Business
+        </h2>
+        <p class="text-lg text-gray-700 font-inter">
+          Lemly empowers you to earn by doing what you love. It gives you the
+          power to run your business legally and efficiently from anywhere.
+        </p>
       </div>
 
-      <!-- First Feature -->
-      <div class="relative mb-24">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="feature-image scroll-reveal">
-            <video class="w-full rounded-xl shadow-lg" src="/v1.mp4" autoplay loop muted></video>
-          </div>
-          <div class="p-4 feature-content scroll-reveal">
-            <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark">
-              Assign products live from any store
-            </h3>
-            <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
-              Transform any retail environment into your personal showroom. Create product cards instantly during live
-              streams, even while on video calls with customers.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-start pop-animation" style="animation-delay: 0.2s;">
-                <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
-                <span class="font-inter">Create product listings in seconds</span>
-              </li>
-              <li class="flex items-start pop-animation" style="animation-delay: 0.3s;">
-                <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
-                <span class="font-inter">Manage inventory on-the-go</span>
-              </li>
-              <li class="flex items-start pop-animation" style="animation-delay: 0.4s;">
-                <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
-                <span class="font-inter">Live coordination with viewers</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Second Feature -->
-      <div class="relative mb-24">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="p-4 md:order-first feature-content scroll-reveal">
-            <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark md:text-right">
-              Lemly floats over your favorite apps
-            </h3>
-            <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed md:text-right">
-              Our intuitive overlay works seamlessly across all your social and messaging platforms, ensuring you never
-              miss a sales opportunity.
-            </p>
-            <div class="flex flex-wrap gap-3 md:justify-end">
-              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.2s;">
-                <i class="fab fa-tiktok text-lg mr-2"></i>
-                <span class="font-medium font-inter">TikTok</span>
-              </div>
-              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.3s;">
-                <i class="fab fa-instagram text-lg mr-2"></i>
-                <span class="font-medium font-inter">Instagram</span>
-              </div>
-              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.4s;">
-                <i class="fab fa-whatsapp text-lg mr-2"></i>
-                <span class="font-medium font-inter">WhatsApp</span>
-              </div>
-              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.5s;">
-                <i class="fab fa-facebook text-lg mr-2"></i>
-                <span class="font-medium font-inter">Facebook</span>
-              </div>
-            </div>
-          </div>
-          <div class="feature-image scroll-reveal">
-            <div class="bg-white rounded-2xl p-8 h-full flex items-center justify-center shadow-lg">
-              <div class="text-center">
-                <div class="text-6xl mb-6">📲</div>
-                <h4 class="text-2xl font-bold mb-3 font-manrope">Works Everywhere</h4>
-                <p class="text-gray-700 font-inter">Our widget floats over all your favorite social apps</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Third Feature -->
       <div class="relative">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="feature-image scroll-reveal">
-            <div class="bg-white rounded-2xl p-8 h-full flex items-center justify-center shadow-lg">
-              <div class="text-center">
-                <div class="text-6xl mb-6">💳</div>
-                <h4 class="text-2xl font-bold mb-3 font-manrope">Instant Payouts</h4>
-                <p class="text-gray-700 font-inter">Funds available immediately after purchase</p>
+        <!-- Continuous vertical line connecting all sections -->
+        <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-lemly-card hidden md:block"
+          aria-hidden="true">
+        </div>
+
+        <!-- First Feature -->
+        <div class="relative mb-24">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="feature-image scroll-reveal">
+              <video class="w-full rounded-xl shadow-lg" src="/v1.mp4" autoplay loop muted></video>
+            </div>
+            <div class="p-4 feature-content scroll-reveal">
+              <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark">
+                Assign products live from any store
+              </h3>
+              <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
+                Transform any retail environment into your personal showroom. Create product cards instantly during live
+                streams, even while on video calls with customers.
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start stagger-item" style="transition-delay: 0.2s;">
+                  <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
+                  <span class="font-inter">Create product listings in seconds</span>
+                </li>
+                <li class="flex items-start stagger-item" style="transition-delay: 0.3s;">
+                  <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
+                  <span class="font-inter">Manage inventory on-the-go</span>
+                </li>
+                <li class="flex items-start stagger-item" style="transition-delay: 0.4s;">
+                  <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
+                  <span class="font-inter">Live coordination with viewers</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Feature -->
+        <div class="relative mb-24">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="p-4 md:order-first feature-content scroll-reveal">
+              <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark md:text-right">
+                Lemly floats over your favorite apps
+              </h3>
+              <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed md:text-right">
+                Our intuitive overlay works seamlessly across all your social and messaging platforms, ensuring you
+                never
+                miss a sales opportunity.
+              </p>
+              <div class="flex flex-wrap gap-3 md:justify-end">
+                <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm scroll-down-anim"
+                  style="transition-delay: 0.1s;">
+                  <i class="fab fa-tiktok text-lg mr-2"></i>
+                  <span class="font-medium font-inter">TikTok</span>
+                </div>
+                <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm scroll-down-anim"
+                  style="transition-delay: 0.2s;">
+                  <i class="fab fa-instagram text-lg mr-2"></i>
+                  <span class="font-medium font-inter">Instagram</span>
+                </div>
+                <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm scroll-down-anim"
+                  style="transition-delay: 0.3s;">
+                  <i class="fab fa-whatsapp text-lg mr-2"></i>
+                  <span class="font-medium font-inter">WhatsApp</span>
+                </div>
+                <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm scroll-down-anim"
+                  style="transition-delay: 0.4s;">
+                  <i class="fab fa-facebook text-lg mr-2"></i>
+                  <span class="font-medium font-inter">Facebook</span>
+                </div>
+              </div>
+            </div>
+            <div class="feature-image scroll-reveal">
+              <div class="bg-white rounded-2xl p-8 h-full flex items-center justify-center shadow-lg">
+                <div class="text-center">
+                  <div class="text-6xl mb-6">📲</div>
+                  <h4 class="text-2xl font-bold mb-3 font-manrope">Works Everywhere</h4>
+                  <p class="text-gray-700 font-inter">Our widget floats over all your favorite social apps</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="p-4 feature-content scroll-reveal">
-            <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark">
-              Buyers check out. You spend instantly.
-            </h3>
-            <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
-              Transactions complete in seconds, with funds immediately available on your Lemly Card. No waiting periods,
-              no manual transfers.
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="bg-white p-4 rounded-xl shadow-sm pop-animation" style="animation-delay: 0.2s;">
-                <div class="text-lemly-dark text-2xl mb-2">
-                  <i class="fas fa-bolt"></i>
+        </div>
+
+        <!-- Third Feature -->
+        <div class="relative">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="feature-image scroll-reveal">
+              <div class="bg-white rounded-2xl p-8 h-full flex items-center justify-center shadow-lg">
+                <div class="text-center">
+                  <div class="text-6xl mb-6">💳</div>
+                  <h4 class="text-2xl font-bold mb-3 font-manrope">Instant Payouts</h4>
+                  <p class="text-gray-700 font-inter">Funds available immediately after purchase</p>
                 </div>
-                <h4 class="font-bold font-manrope">Instant Access</h4>
-                <p class="text-sm mt-1 text-gray-700 font-inter">
-                  Funds available immediately
-                </p>
               </div>
-              <div class="bg-white p-4 rounded-xl shadow-sm pop-animation" style="animation-delay: 0.3s;">
-                <div class="text-lemly-dark text-2xl mb-2">
-                  <i class="fas fa-globe-europe"></i>
+            </div>
+            <div class="p-4 feature-content scroll-reveal">
+              <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark">
+                Buyers check out. You spend instantly.
+              </h3>
+              <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
+                Transactions complete in seconds, with funds immediately available on your Lemly Card. No waiting
+                periods,
+                no manual transfers.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-xl shadow-sm pop-animation" style="animation-delay: 0.2s;">
+                  <div class="text-lemly-dark text-2xl mb-2">
+                    <i class="fas fa-bolt"></i>
+                  </div>
+                  <h4 class="font-bold font-manrope">Instant Access</h4>
+                  <p class="text-sm mt-1 text-gray-700 font-inter">
+                    Funds available immediately
+                  </p>
                 </div>
-                <h4 class="font-bold font-manrope">EU-wide</h4>
-                <p class="text-sm mt-1 text-gray-700 font-inter">
-                  Spend anywhere Visa is accepted
-                </p>
+                <div class="bg-white p-4 rounded-xl shadow-sm pop-animation" style="animation-delay: 0.3s;">
+                  <div class="text-lemly-dark text-2xl mb-2">
+                    <i class="fas fa-globe-europe"></i>
+                  </div>
+                  <h4 class="font-bold font-manrope">EU-wide</h4>
+                  <p class="text-sm mt-1 text-gray-700 font-inter">
+                    Spend anywhere Visa is accepted
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <div class="scroll-section">
     <div class="content">
@@ -1282,7 +1855,7 @@
             </div>
           </div>
           <div class="flex-1">
-            <div class="bg-white p-6 rounded-2xl shadow-lg">
+            <div class="bg-white p-6 rounded-2xl shadow-lg hover-lift">
               <div class="flex justify-between items-center mb-6">
                 <h3 class="font-bold">Your Shopping Basket</h3>
                 <span class="text-sm text-gray-500">3 items</span>
@@ -1330,7 +1903,7 @@
                 </div>
               </div>
 
-              <button class="w-full bg-lemly-dark text-white py-3 rounded-lg font-medium">
+              <button class="w-full cta-button">
                 Pay Securely
               </button>
             </div>
@@ -1345,7 +1918,7 @@
       <div class="flex flex-col lg:flex-row gap-16 items-center">
         <div class="flex-1 glitter-card-container">
 
-          <aside class="card-front">
+          <aside class="card-front shine">
             <h3 class="lemly-branding"
               style="position: absolute; top: 8%; left: 8%; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: 0; color: #ccc; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
               Lemly.
@@ -1451,7 +2024,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto">
-          <div class="pricing-card bg-white p-8 md:p-12">
+          <div class="pricing-card bg-white p-8 md:p-12 hover-lift shine">
             <div class="flex flex-col md:flex-row gap-8">
               <div class="md:w-1/3 text-center md:text-left">
                 <div class="text-5xl font-bold mb-2">
@@ -1463,8 +2036,7 @@
                 <div class="bg-gray-100 text-lemly-dark px-4 py-2 rounded-full inline-block mb-8">
                   Start free for 30 days
                 </div>
-                <button
-                  class="w-full md:w-auto bg-lemly-dark text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
+                <button class="cta-button w-full md:w-auto" aria-label="Get Early Access">
                   Get Early Access →
                 </button>
               </div>
@@ -1474,55 +2046,55 @@
                   Everything you need to run your business
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.05s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Unlimited product cards & store visits</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.1s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Real-time basket creation</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.15s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Professional wallet with your own IBAN</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.2s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Virtual Visa card</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.25s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Mobile wallet payments (Google/Samsung Pay)</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.3s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Instant access to balance</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.35s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Withdraw to any EU bank account</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.4s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <span>Export orders for shipping</span>
                   </div>
-                  <div class="flex items-start">
+                  <div class="flex items-start stagger-item" style="transition-delay: 0.45s;">
                     <div class="mt-1 mr-3 text-green-500">
                       <i class="fas fa-check-circle"></i>
                     </div>
@@ -1551,7 +2123,7 @@
       </div>
 
       <div class="faq-accordion-container">
-        <details class="faq-item scroll-reveal">
+        <details class="faq-item scroll-reveal hover-lift">
           <summary>What exactly is Lemly?</summary>
           <div class="faq-answer">
             <p>
@@ -1563,7 +2135,7 @@
             </p>
           </div>
         </details>
-        <details class="faq-item scroll-reveal">
+        <details class="faq-item scroll-reveal hover-lift">
           <summary>Who is Lemly for?</summary>
           <div class="faq-answer">
             <p>
@@ -1574,7 +2146,7 @@
             </p>
           </div>
         </details>
-        <details class="faq-item scroll-reveal">
+        <details class="faq-item scroll-reveal hover-lift">
           <summary>
             How is this better than just using DMs and PayPal?
           </summary>
@@ -1589,7 +2161,7 @@
             </p>
           </div>
         </details>
-        <details class="faq-item scroll-reveal">
+        <details class="faq-item scroll-reveal hover-lift">
           <summary>What do my customers need to do to pay?</summary>
           <div class="faq-answer">
             <p>
@@ -1601,7 +2173,7 @@
             </p>
           </div>
         </details>
-        <details class="faq-item scroll-reveal">
+        <details class="faq-item scroll-reveal hover-lift">
           <summary>
             How does the instant payout work with the Lemly Card?
           </summary>
@@ -1631,8 +2203,7 @@
       <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
         <input type="email" placeholder="Enter your email"
           class="px-6 py-4 rounded-full bg-white/10 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white flex-grow" />
-        <button
-          class="bg-white text-lemly-dark px-8 py-4 rounded-full font-medium hover:bg-gray-200 transition whitespace-nowrap">
+        <button class="cta-button bg-white text-lemly-dark">
           Get Early Access →
         </button>
       </div>
@@ -1655,16 +2226,16 @@
           </a>
         </div>
         <div class="flex space-x-6">
-          <a href="#" class="text-gray-400 hover:text-white transition">
+          <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
             <i class="fab fa-twitter text-xl"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition">
+          <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
             <i class="fab fa-instagram text-xl"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition">
+          <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
             <i class="fab fa-facebook text-xl"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition">
+          <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
             <i class="fab fa-linkedin text-xl"></i>
           </a>
         </div>
@@ -1676,8 +2247,29 @@
       </div>
     </div>
   </footer>
- 
+
   <script>
+    // Check visible elements on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      // Trigger initial animations for elements above the fold
+      const initialVisibleElements = document.querySelectorAll('.scroll-reveal, .feature-container');
+      initialVisibleElements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9) {
+          if (element.classList.contains('scroll-reveal')) {
+            element.classList.add('active');
+          } else if (element.classList.contains('feature-container')) {
+            element.classList.add('show');
+            const featureImage = element.querySelector('.feature-image');
+            const featureContent = element.querySelector('.feature-content');
+
+            if (featureImage) featureImage.classList.add('show');
+            if (featureContent) featureContent.classList.add('show');
+          }
+        }
+      });
+    });
+
     // Sticky nav background change on scroll
     window.addEventListener("scroll", function () {
       const header = document.querySelector(".sticky-nav");
@@ -1686,10 +2278,15 @@
       } else {
         header.classList.remove("scrolled");
       }
- 
+
       const footer = document.querySelector('footer');
-      const footerTop = footer.getBoundingClientRect().top; 
- 
+      const footerTop = footer.getBoundingClientRect().top;
+
+      // Parallax effect
+      const parallaxBg = document.querySelector('.parallax-bg');
+      if (parallaxBg) {
+        parallaxBg.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+      }
     });
 
     // Simple email validation for demo
@@ -1712,61 +2309,137 @@
 
     // Xiaomi-style scrolling animation
     document.addEventListener('DOMContentLoaded', function () {
-      const sections = document.querySelectorAll('.scroll-section'); 
- 
+      const sections = document.querySelectorAll('.scroll-section');
+      const dots = document.querySelectorAll('.scroll-indicator-dot');
+
+      // Track scroll direction
+      let lastScrollTop = 0;
+      let scrollDirection = 'down';
+
       // Scroll event listener
       window.addEventListener('scroll', function () {
         const scrollPosition = window.scrollY;
+
+        // Determine scroll direction
+        const st = window.scrollY || document.documentElement.scrollTop;
+        scrollDirection = st > lastScrollTop ? 'down' : 'up';
+        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 
         sections.forEach((section, index) => {
           const sectionTop = section.offsetTop;
           const sectionHeight = section.offsetHeight;
           const sectionBottom = sectionTop + sectionHeight;
 
-          // Check if section is in view
-          if (scrollPosition >= sectionTop - window.innerHeight * 0.3 &&
+          // Check if section is in view - with more sensitive threshold (0.8 instead of 0.3)
+          if (scrollPosition >= sectionTop - window.innerHeight * 0.8 &&
             scrollPosition < sectionBottom - window.innerHeight * 0.3) {
             section.classList.add('active');
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[index].classList.add('active');
+            if (dots.length > 0) {
+              dots.forEach(dot => dot.classList.remove('active'));
+              if (dots[index]) dots[index].classList.add('active');
+            }
+          } else if (scrollDirection === 'up' &&
+            (scrollPosition < sectionTop - window.innerHeight * 0.9 ||
+              scrollPosition >= sectionBottom)) {
+            // Remove active class when scrolling up and the section is not in view
+            section.classList.remove('active');
           }
         });
-      }); 
+      });
+
+      // Trigger scroll event once on load to reveal initial elements
+      window.dispatchEvent(new Event('scroll'));
     });
 
     // Feature sections animation
     document.addEventListener('DOMContentLoaded', function () {
       const featureContainers = document.querySelectorAll('.feature-container');
       const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+      const scrollDownElements = document.querySelectorAll('.scroll-down-anim');
+      const fadeInElements = document.querySelectorAll('.fade-in');
+      const staggerItems = document.querySelectorAll('.stagger-item');
 
-      // Function to check if element is in viewport
+      // Track scroll direction
+      let lastScrollTop = 0;
+      let scrollDirection = 'down';
+
+      // Function to check if element is in viewport - with more sensitive threshold
       function isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
-          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
           rect.bottom >= 0
         );
       }
 
       // Function to handle scroll
       function handleScroll() {
-        featureContainers.forEach(container => {
-          if (isInViewport(container)) {
-            container.classList.add('show');
-            container.querySelector('.feature-image').classList.add('show');
-            container.querySelector('.feature-content').classList.add('show');
+        // Determine scroll direction
+        const st = window.scrollY || document.documentElement.scrollTop;
+        scrollDirection = st > lastScrollTop ? 'down' : 'up';
+        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+
+        // Apply staggered animations
+        staggerItems.forEach((item, index) => {
+          if (isInViewport(item)) {
+            setTimeout(() => {
+              item.classList.add('active');
+            }, index * 100); // 100ms delay between each item
+          } else if (scrollDirection === 'up' && !isInViewport(item)) {
+            item.classList.remove('active');
           }
         });
 
+        // Handle feature containers
+        featureContainers.forEach(container => {
+          if (isInViewport(container)) {
+            container.classList.add('show');
+            const featureImage = container.querySelector('.feature-image');
+            const featureContent = container.querySelector('.feature-content');
+
+            if (featureImage) featureImage.classList.add('show');
+            if (featureContent) featureContent.classList.add('show');
+          } else if (scrollDirection === 'up' && !isInViewport(container)) {
+            // Only remove classes when scrolling up and element is no longer in viewport
+            container.classList.remove('show');
+            const featureImage = container.querySelector('.feature-image');
+            const featureContent = container.querySelector('.feature-content');
+
+            if (featureImage) featureImage.classList.remove('show');
+            if (featureContent) featureContent.classList.remove('show');
+          }
+        });
+
+        // Handle standard scroll reveals (bottom to top animations)
         scrollRevealElements.forEach(element => {
           if (isInViewport(element)) {
             element.classList.add('active');
+          } else if (scrollDirection === 'up' && !isInViewport(element)) {
+            element.classList.remove('active');
+          }
+        });
+
+        // Handle scroll-down animations (top to bottom animations)
+        scrollDownElements.forEach(element => {
+          if (isInViewport(element)) {
+            element.classList.add('active');
+          } else if (scrollDirection === 'up' && !isInViewport(element)) {
+            element.classList.remove('active');
+          }
+        });
+
+        // Handle fade-in animations
+        fadeInElements.forEach(element => {
+          if (isInViewport(element)) {
+            element.classList.add('active');
+          } else if (scrollDirection === 'up' && !isInViewport(element)) {
+            element.classList.remove('active');
           }
         });
       }
 
       // Initial check
-      handleScroll();
+      setTimeout(handleScroll, 100);
 
       // Scroll event
       window.addEventListener('scroll', handleScroll);
@@ -1777,6 +2450,24 @@
       setTimeout(() => {
         document.querySelector('.brand-strip').style.animation = 'scroll 30s linear infinite';
       }, 500);
+    });
+
+    // Add parallax mouse movement effect for hero section
+    document.addEventListener('DOMContentLoaded', function () {
+      const parallaxBg = document.querySelector('.parallax-bg');
+      const heroSection = document.querySelector('.h-screen');
+
+      if (parallaxBg && heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const mouseX = e.clientX / window.innerWidth;
+          const mouseY = e.clientY / window.innerHeight;
+
+          const moveX = (mouseX - 0.5) * 20; // Adjust multiplier for movement intensity
+          const moveY = (mouseY - 0.5) * 20;
+
+          parallaxBg.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) translateY(${window.scrollY * 0.15}px)`;
+        });
+      }
     });
   </script>
 </body>
