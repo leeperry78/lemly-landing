@@ -70,13 +70,16 @@
     }
 
     .section-divider {
-      height: 1px;
+      height: 0.3px;
       background: linear-gradient(90deg,
-          rgba(0, 0, 0, 0) 0%,
-          rgba(0, 0, 0, 0.1) 50%,
-          rgba(0, 0, 0, 0) 100%);
-      margin: 5rem auto;
-      max-width: 80%;
+          rgba(199, 199, 199, 0.438) 0%,
+          rgba(201, 199, 199, 0.438) 50%,
+          rgba(238, 238, 238, 0.688) 100%);
+      /* margin: 5rem auto;  */
+    }
+
+    .scrolled .scroll-indicator-dot {
+      display: block;
     }
 
     .feature-card {
@@ -162,6 +165,13 @@
       top: 0;
     }
 
+    .sticky-nav .bg-lemly-dark {
+      /* Keep the background dark */
+      background-color: #111111;
+      color: #ffffff;
+      /* White text on dark background */
+    }
+
     .sticky-nav.scrolled {
       background-color: rgba(255, 255, 255, 0.9);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -170,15 +180,16 @@
 
     .sticky-nav a,
     .sticky-nav h1 {
-      color: #ffffff;
-      /* White for initial state */
+      color: #111111;
+      /* Black for initial state */
       transition: color 0.3s ease-in-out;
     }
+
 
     .sticky-nav.scrolled a,
     .sticky-nav.scrolled h1 {
       color: #111111;
-
+      /* Keep black when scrolled against white background */
     }
 
     .sticky-nav.scrolled .text-white {
@@ -325,7 +336,7 @@
       background-position: 50% 50%;
       background-blend-mode: overlay;
       -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
+      background-clip: text;
       animation: bg var(--duration) ease infinite;
     }
 
@@ -438,6 +449,532 @@
     #contactless {
       display: none;
     }
+
+    /* XIAOMI-STYLE SCROLLING ANIMATION */
+    .scroll-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .scroll-section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-section .content {
+      max-width: 1200px;
+      width: 90%;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .scroll-section:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    .scroll-section:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+/* 
+    .scroll-section h2 {
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    } */
+
+    .scroll-section h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #111111, #a9a9a9);
+    }
+
+    .scroll-section p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .scroll-section .img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transform: scale(0.95);
+      transition: transform 0.6s ease;
+    }
+
+    .scroll-section.active .img-container {
+      transform: scale(1);
+    }
+
+    .scroll-section .img-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .scroll-indicator-dot {
+      width: 12px;
+      height: 12px;
+      display: none;
+      border-radius: 50%;
+      background-color: #a9a9a9;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-indicator-dot.active {
+      background-color: #111111;
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 768px) {
+      .scroll-section {
+        min-height: auto;
+        padding: 60px 0;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+    }
+
+    .brand-strip-container h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #fff, #aaa);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: #aaa;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .brand-strip-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 2rem 0;
+      margin: 2rem 0;
+      background: transparent;
+    }
+
+    .gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* background: linear-gradient(90deg,
+          rgba(15, 15, 15, 1) 0%,
+          rgba(15, 15, 15, 0.027) 10%,
+          rgba(15, 15, 15, 0.072) 90%,
+          rgba(15, 15, 15, 0.493) 100%); */
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .brand-strip {
+      display: flex;
+      width: 200%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .brand-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      padding: 1.5rem;
+      margin: 0 1rem;
+      border-radius: 16px;
+      background: rgba(30, 30, 30, 0.7);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-item:hover {
+      transform: translateY(-10px);
+      background: rgba(40, 40, 40, 0.8);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .brand-item:hover .brand-icon {
+      transform: scale(1.15);
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #f0f0f0;
+      letter-spacing: 0.5px;
+    }
+
+    .facebook .brand-icon {
+      color: #fff;
+    }
+
+    .instagram .brand-icon {
+      color: #fff;
+    }
+
+    .whatsapp .brand-icon {
+      color: #fff;
+    }
+
+    .tiktok .brand-icon {
+      color: #fff;
+    }
+
+    .twitter .brand-icon {
+      color: #fff;
+    }
+
+    .linkedin .brand-icon {
+      color: #fff;
+    }
+
+    .pinterest .brand-icon {
+      color: #fff;
+    }
+
+    .snapchat .brand-icon {
+      color: #fff;
+    }
+
+    .youtube .brand-icon {
+      color: #fff;
+    }
+
+    .discord .brand-icon {
+      color: #fff;
+    }
+
+    .brand-item:hover .facebook .brand-icon {
+      color: #1877F2;
+    }
+
+    .brand-item:hover .instagram .brand-icon {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-item:hover .whatsapp .brand-icon {
+      color: #25D366;
+    }
+
+    .brand-item:hover .tiktok .brand-icon {
+      color: #000;
+    }
+
+    .brand-item:hover .twitter .brand-icon {
+      color: #1DA1F2;
+    }
+
+    .brand-item:hover .linkedin .brand-icon {
+      color: #0A66C2;
+    }
+
+    .brand-item:hover .pinterest .brand-icon {
+      color: #BD081C;
+    }
+
+    .brand-item:hover .snapchat .brand-icon {
+      color: #FFFC00;
+    }
+
+    .brand-item:hover .youtube .brand-icon {
+      color: #FF0000;
+    }
+
+    .brand-item:hover .discord .brand-icon {
+      color: #5865F2;
+    }
+
+    .brand-strip img {
+      height: 50px;
+      width: auto;
+      margin-left: 70px;
+      object-fit: cover;
+      padding: 1px;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .highlight {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .brand-item {
+        width: 160px;
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .brand-item {
+        width: 140px;
+        padding: 1rem;
+      }
+
+      .brand-icon {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-strip-container {
+        border-radius: 12px;
+      }
+
+      .brand-item {
+        width: 120px;
+        margin: 0 0.5rem;
+        padding: 0.8rem;
+      }
+
+      .brand-icon {
+        font-size: 2.5rem;
+      }
+
+      .brand-name {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .brand-item {
+        width: 100px;
+        padding: 0.6rem;
+      }
+
+      .brand-icon {
+        font-size: 2rem;
+      }
+
+      .brand-name {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* New feature section styles */
+    .feature-section {
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+
+    .feature-container {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .feature-container.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-image {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(0.95);
+    }
+
+    .feature-image.show {
+      transform: scale(1);
+    }
+
+    .feature-content {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-delay: 0.2s;
+      opacity: 0;
+      transform: translateX(30px);
+    }
+
+    .feature-content.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .feature-reversed .feature-content {
+      transform: translateX(-30px);
+    }
+
+    .feature-reversed .feature-content.show {
+      transform: translateX(0);
+    }
+
+    /* FAQ Styles */
+    .faq-section {
+      padding: 5rem 0;
+      background-color: #f5f5f5;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e5e5;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      background-color: rgba(229, 229, 229, 0.3);
+    }
+
+    .faq-item summary {
+      padding: 1.5rem 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+      position: relative;
+      padding-right: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(0deg);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #a9a9a9;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .faq-item[open]>summary::after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 0.5rem 1.5rem;
+      color: #555;
+      line-height: 1.6;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      70% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .pop-animation {
+      animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .scroll-reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 
@@ -451,6 +988,7 @@
           <a href="#how-it-works" class="hover:text-lemly-grey transition">How It Works</a>
           <a href="#the-card" class="hover:text-lemly-grey transition">The Card</a>
           <a href="#pricing" class="hover:text-lemly-grey transition">Pricing</a>
+          <a href="#faq" class="hover:text-lemly-grey transition">FAQ</a>
         </nav>
       </div>
       <a href="#pricing"
@@ -459,52 +997,88 @@
       </a>
     </div>
   </header>
+  <section class="relative w-full h-screen max-h-[100vh] overflow-hidden">
+    <!-- Image as a tag instead of background -->
+    <img src="/bg.png" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
 
+    <!-- White overlay instead of black -->
+    <div class="absolute inset-0"></div>
 
-  <section class="relative w-full h-screen max-h-[100vh] overflow-hidden bg-cover bg-center" style="
-        background-image: url('/bg.png');
-      ">
-    <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative h-full max-w-7xl mx-auto flex items-center justify-start z-10">
       <div class="text-left px-6 max-w-2xl">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-manrope">
+        <h1 class="text-5xl md:text-6xl font-bold text-lemly-dark mb-6 font-manrope">
           Sell Live from Any Store. Instantly.
         </h1>
-        <p class="text-xl md:text-2xl text-gray-200 mb-10 font-inter">
+        <p class="text-xl md:text-2xl text-gray-700 mb-10 font-inter">
           Turn any retail store into your personal showroom. Create product
           cards on the fly, manage live orders, and get paid on the spot.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-start">
           <input type="email" placeholder="Enter your email"
-            class="px-6 py-4 rounded-full bg-white/10 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white flex-grow" />
+            class="px-6 py-4 rounded-full bg-lemly-dark/10 backdrop-blur-md text-lemly-dark placeholder-lemly-dark/70 focus:outline-none focus:ring-2 focus:ring-lemly-dark flex-grow" />
           <button
             class="bg-lemly-dark text-white px-8 py-4 rounded-full font-medium hover:bg-gray-800 transition whitespace-nowrap">
             Get Early Access →
           </button>
         </div>
-        <p class="text-sm text-gray-400 mt-6 font-inter">
+        <p class="text-sm text-gray-600 mt-6 font-inter">
           📝 Our waitlist is open to registered entrepreneurs aged 18+ with a
           recent Android device.
         </p>
       </div>
     </div>
   </section>
+  <center>
+    <div class="brand-strip-container">
+      <div class="gradient-overlay"></div>
+      <div class="brand-strip">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" />
 
-  <section id="how-it-works" class="py-20 bg-lemly-light-grey">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col lg:flex-row items-center gap-16">
-        <div class="flex-1">
-          <div class="phone-mockup mx-auto">
-            <div class="phone-screen">
-              <img src="/mimg.jpg" alt="Lemly Widget Preview" class="p-2 w-full h-full object-cover rounded-lg" />
-            </div>
-          </div>
-        </div>
+
+
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" />
+
+
+
+
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" />
+
+      </div>
+    </div>
+  </center>
+
+  <div id="how-it-works" class="scroll-section">
+    <div class="content">
+      <div class="flex flex-col lg:flex-row-reverse items-center gap-16">
         <div class="flex-1">
           <h2 class="text-3xl md:text-4xl font-bold mb-6 font-manrope">
             Stream. Assign. Get Paid. Shop.
           </h2>
-          <p class="text-lg text-gray-700 mb-8 font-inter">
+          <p class="text-xl text-gray-700 mb-8 font-inter">
             Lemly is your command center for live selling. Our floating widget
             lets you create product cards, manage baskets, and assign items in
             real-time — directly from your stream or chat. It's a seamless
@@ -531,277 +1105,159 @@
             <p class="font-medium">Manage orders and get paid instantly</p>
           </div>
         </div>
+        <div class="flex-1">
+          <div class="phone-mockup mx-auto">
+            <div class="phone-screen">
+              <img src="/mimg.jpg" alt="Lemly Widget Preview" class="p-2 w-full h-full object-cover rounded-lg" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <section class="py-20 bg-lemly-light-grey">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-manrope">
-          Turn Your Passion for Shopping into a Professional Business
-        </h2>
-        <p class="text-lg text-gray-700 font-inter">
-          Lemly empowers you to earn by doing what you love. It gives you the
-          power to run your business legally and efficiently from anywhere —
-          whether you're on TikTok, WhatsApp, or Instagram — turning live
-          viewers into happy customers in seconds.
-        </p>
+  </div>
+<!-- Unified Feature Sections -->
+<section class="py-20 bg-lemly-light-grey overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-20 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 font-manrope text-lemly-dark">
+        Turn Your Passion for Shopping into a Professional Business
+      </h2>
+      <p class="text-lg text-gray-700 font-inter">
+        Lemly empowers you to earn by doing what you love. It gives you the
+        power to run your business legally and efficiently from anywhere.
+      </p>
+    </div>
+    
+    <div class="relative">
+      <!-- Continuous vertical line connecting all sections -->
+      <div
+        class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-lemly-card hidden md:block"
+        aria-hidden="true">
       </div>
 
-      <!-- <div class="scroll-slider md:h-[600px] rounded-2xl">
-        <div class="feature-card bg-white p-8 mb-6">
-          <div class="flex flex-col md:flex-row gap-10 items-center">
-            <div class="flex-1">
-              <div class="bg-lemly-card rounded-2xl p-6 h-64 flex items-center justify-center">
-                <div class="text-center">
-                  <div class="text-6xl mb-4">🛍️</div>
-                  <h3 class="text-xl font-bold mb-2">Sell While You Shop</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-4 font-manrope">
-                Assign products live from any store
-              </h3>
-              <p class="text-gray-700 mb-6 font-inter">
-                Transform any retail environment into your personal showroom.
-                Create product cards instantly during live streams, even while
-                on video calls with customers.
-              </p>
-              <ul class="space-y-3">
-                <li class="flex items-start">
-                  <div class="mt-1 mr-3 text-lemly-dark">
-                    <i class="fas fa-check-circle"></i>
-                  </div>
-                  <span>Create product listings in seconds</span>
-                </li>
-                <li class="flex items-start">
-                  <div class="mt-1 mr-3 text-lemly-dark">
-                    <i class="fas fa-check-circle"></i>
-                  </div>
-                  <span>Manage inventory on-the-go</span>
-                </li>
-                <li class="flex items-start">
-                  <div class="mt-1 mr-3 text-lemly-dark">
-                    <i class="fas fa-check-circle"></i>
-                  </div>
-                  <span>Live coordination with viewers</span>
-                </li>
-              </ul>
-            </div>
+      <!-- First Feature -->
+      <div class="relative mb-24">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="feature-image scroll-reveal">
+            <video class="w-full rounded-xl shadow-lg" src="/v1.mp4" autoplay loop muted></video>
           </div>
-        </div>
-
-        <div class="feature-card bg-white p-8 mb-6">
-          <div class="flex flex-col md:flex-row gap-10 items-center">
-            <div class="flex-1">
-              <div class="bg-lemly-card rounded-2xl p-6 h-64 flex items-center justify-center">
-                <div class="text-center">
-                  <div class="text-6xl mb-4">📲</div>
-                  <h3 class="text-xl font-bold mb-2">Works Everywhere</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-4 font-manrope">
-                Lemly floats over your favorite apps
-              </h3>
-              <p class="text-gray-700 mb-6 font-inter">
-                Our intuitive overlay works seamlessly across all your social
-                and messaging platforms, ensuring you never miss a sales
-                opportunity.
-              </p>
-              <div class="flex flex-wrap gap-4">
-                <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                  <i class="fab fa-tiktok text-lg mr-2"></i>
-                  <span>TikTok</span>
-                </div>
-                <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                  <i class="fab fa-instagram text-lg mr-2"></i>
-                  <span>Instagram</span>
-                </div>
-                <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                  <i class="fab fa-whatsapp text-lg mr-2"></i>
-                  <span>WhatsApp</span>
-                </div>
-                <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                  <i class="fab fa-facebook text-lg mr-2"></i>
-                  <span>Facebook</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="feature-card bg-white p-8">
-          <div class="flex flex-col md:flex-row gap-10 items-center">
-            <div class="flex-1">
-              <div class="bg-lemly-card rounded-2xl p-6 h-64 flex items-center justify-center">
-                <div class="text-center">
-                  <div class="text-6xl mb-4">💳</div>
-                  <h3 class="text-xl font-bold mb-2">Instant Payouts</h3>
-                </div>
-              </div>
-            </div>
-            <div class="flex-1">
-              <h3 class="text-2xl font-bold mb-4 font-manrope">
-                Buyers check out. You spend instantly.
-              </h3>
-              <p class="text-gray-700 mb-6 font-inter">
-                Transactions complete in seconds, with funds immediately
-                available on your Lemly Card. No waiting periods, no manual
-                transfers.
-              </p>
-              <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-100 p-4 rounded-xl">
-                  <div class="text-lemly-dark text-2xl mb-2">
-                    <i class="fas fa-bolt"></i>
-                  </div>
-                  <h4 class="font-bold">Instant Access</h4>
-                  <p class="text-sm mt-1">
-                    Funds available immediately after sale
-                  </p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-xl">
-                  <div class="text-lemly-dark text-2xl mb-2">
-                    <i class="fas fa-globe-europe"></i>
-                  </div>
-                  <h4 class="font-bold">EU-wide</h4>
-                  <p class="text-sm mt-1">Spend anywhere Visa is accepted</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-       </div> -->
-
-      <div class="w-full">
-        <!-- Slide 1 -->
-        <section class="min-h-screen flex flex-col md:flex-row items-center gap-10 px-6 md:px-20 py-16 bg-white">
-          <!-- Left: Image -->
-          <div class="w-full md:w-1/2">
-            <div class="bg-lemly-card rounded-2xl p-6 h-64 flex items-center justify-center shadow-md">
-              <div class="text-center">
-                <div class="text-6xl mb-4">🛍️</div>
-                <h3 class="text-xl font-bold mb-2">Sell While You Shop</h3>
-              </div>
-            </div>
-          </div>
-          <!-- Right: Text -->
-          <div class="w-full md:w-1/2">
-            <h3 class="text-3xl font-bold mb-4 font-manrope">
+          <div class="p-4 feature-content scroll-reveal">
+            <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark">
               Assign products live from any store
             </h3>
             <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
               Transform any retail environment into your personal showroom. Create product cards instantly during live
               streams, even while on video calls with customers.
             </p>
-            <ul class="space-y-3 text-base">
-              <li class="flex items-start">
-                <i class="fas fa-check-circle mt-1 mr-3 text-lemly-dark"></i>
-                <span>Create product listings in seconds</span>
+            <ul class="space-y-3">
+              <li class="flex items-start pop-animation" style="animation-delay: 0.2s;">
+                <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
+                <span class="font-inter">Create product listings in seconds</span>
               </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle mt-1 mr-3 text-lemly-dark"></i>
-                <span>Manage inventory on-the-go</span>
+              <li class="flex items-start pop-animation" style="animation-delay: 0.3s;">
+                <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
+                <span class="font-inter">Manage inventory on-the-go</span>
               </li>
-              <li class="flex items-start">
-                <i class="fas fa-check-circle mt-1 mr-3 text-lemly-dark"></i>
-                <span>Live coordination with viewers</span>
+              <li class="flex items-start pop-animation" style="animation-delay: 0.4s;">
+                <i class="fas fa-check-circle text-lemly-dark mt-1 mr-3"></i>
+                <span class="font-inter">Live coordination with viewers</span>
               </li>
             </ul>
           </div>
-        </section>
+        </div>
+      </div>
 
-        <!-- Slide 2 (Alternating layout) -->
-        <section
-          class="min-h-screen flex flex-col-reverse md:flex-row items-center gap-10 px-6 md:px-20 py-16 bg-gray-50">
-          <!-- Left: Text -->
-          <div class="w-full md:w-1/2">
-            <h3 class="text-3xl font-bold mb-4 font-manrope">
+      <!-- Second Feature -->
+      <div class="relative mb-24">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="p-4 md:order-first feature-content scroll-reveal">
+            <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark md:text-right">
               Lemly floats over your favorite apps
             </h3>
-            <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
+            <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed md:text-right">
               Our intuitive overlay works seamlessly across all your social and messaging platforms, ensuring you never
               miss a sales opportunity.
             </p>
-            <div class="flex flex-wrap gap-4">
-              <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                <i class="fab fa-tiktok text-lg mr-2"></i> TikTok
+            <div class="flex flex-wrap gap-3 md:justify-end">
+              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.2s;">
+                <i class="fab fa-tiktok text-lg mr-2"></i>
+                <span class="font-medium font-inter">TikTok</span>
               </div>
-              <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                <i class="fab fa-instagram text-lg mr-2"></i> Instagram
+              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.3s;">
+                <i class="fab fa-instagram text-lg mr-2"></i>
+                <span class="font-medium font-inter">Instagram</span>
               </div>
-              <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                <i class="fab fa-whatsapp text-lg mr-2"></i> WhatsApp
+              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.4s;">
+                <i class="fab fa-whatsapp text-lg mr-2"></i>
+                <span class="font-medium font-inter">WhatsApp</span>
               </div>
-              <div class="flex items-center bg-gray-100 px-4 py-2 rounded-full">
-                <i class="fab fa-facebook text-lg mr-2"></i> Facebook
+              <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm pop-animation" style="animation-delay: 0.5s;">
+                <i class="fab fa-facebook text-lg mr-2"></i>
+                <span class="font-medium font-inter">Facebook</span>
               </div>
             </div>
           </div>
-          <!-- Right: Image -->
-          <div class="w-full md:w-1/2">
-            <div class="bg-lemly-card rounded-2xl p-6 h-64 flex items-center justify-center shadow-md">
+          <div class="feature-image scroll-reveal">
+            <div class="bg-white rounded-2xl p-8 h-full flex items-center justify-center shadow-lg">
               <div class="text-center">
-                <div class="text-6xl mb-4">📲</div>
-                <h3 class="text-xl font-bold mb-2">Works Everywhere</h3>
+                <div class="text-6xl mb-6">📲</div>
+                <h4 class="text-2xl font-bold mb-3 font-manrope">Works Everywhere</h4>
+                <p class="text-gray-700 font-inter">Our widget floats over all your favorite social apps</p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
 
-        <!-- Slide 3 -->
-        <section class="min-h-screen flex flex-col md:flex-row items-center gap-10 px-6 md:px-20 py-16 bg-white">
-          <!-- Left: Image -->
-          <div class="w-full md:w-1/2">
-            <div class="bg-lemly-card rounded-2xl p-6 h-64 flex items-center justify-center shadow-md">
+      <!-- Third Feature -->
+      <div class="relative">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="feature-image scroll-reveal">
+            <div class="bg-white rounded-2xl p-8 h-full flex items-center justify-center shadow-lg">
               <div class="text-center">
-                <div class="text-6xl mb-4">💳</div>
-                <h3 class="text-xl font-bold mb-2">Instant Payouts</h3>
+                <div class="text-6xl mb-6">💳</div>
+                <h4 class="text-2xl font-bold mb-3 font-manrope">Instant Payouts</h4>
+                <p class="text-gray-700 font-inter">Funds available immediately after purchase</p>
               </div>
             </div>
           </div>
-          <!-- Right: Text -->
-          <div class="w-full md:w-1/2">
-            <h3 class="text-3xl font-bold mb-4 font-manrope">
+          <div class="p-4 feature-content scroll-reveal">
+            <h3 class="text-3xl font-bold mb-4 font-manrope text-lemly-dark">
               Buyers check out. You spend instantly.
             </h3>
             <p class="text-gray-700 mb-6 font-inter text-lg leading-relaxed">
               Transactions complete in seconds, with funds immediately available on your Lemly Card. No waiting periods,
               no manual transfers.
             </p>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="bg-gray-100 p-4 rounded-xl shadow">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-xl shadow-sm pop-animation" style="animation-delay: 0.2s;">
                 <div class="text-lemly-dark text-2xl mb-2">
                   <i class="fas fa-bolt"></i>
                 </div>
-                <h4 class="font-bold">Instant Access</h4>
-                <p class="text-sm mt-1">Funds available immediately after sale</p>
+                <h4 class="font-bold font-manrope">Instant Access</h4>
+                <p class="text-sm mt-1 text-gray-700 font-inter">
+                  Funds available immediately
+                </p>
               </div>
-              <div class="bg-gray-100 p-4 rounded-xl shadow">
+              <div class="bg-white p-4 rounded-xl shadow-sm pop-animation" style="animation-delay: 0.3s;">
                 <div class="text-lemly-dark text-2xl mb-2">
                   <i class="fas fa-globe-europe"></i>
                 </div>
-                <h4 class="font-bold">EU-wide</h4>
-                <p class="text-sm mt-1">Spend anywhere Visa is accepted</p>
+                <h4 class="font-bold font-manrope">EU-wide</h4>
+                <p class="text-sm mt-1 text-gray-700 font-inter">
+                  Spend anywhere Visa is accepted
+                </p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-
-
     </div>
-  </section>
+  </div>
+</section>
 
-    <div class="section-divider"></div>
-
-  <section class="py-20 bg-lemly-light-grey">
-    <div class="max-w-7xl mx-auto px-6">
+  <div class="scroll-section">
+    <div class="content">
       <div class="checkout-layer p-8 md:p-16">
         <div class="flex flex-col lg:flex-row gap-12 items-center">
           <div class="flex-1">
@@ -882,10 +1338,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="the-card" class="py-20 bg-lemly-light-grey">
-    <div class="max-w-6xl mx-auto px-6">
+  <div id="the-card" class="scroll-section">
+    <div class="content">
       <div class="flex flex-col lg:flex-row gap-16 items-center">
         <div class="flex-1 glitter-card-container">
 
@@ -939,7 +1395,7 @@
         </div>
 
         <div class="flex-1">
-          <h2 class="text-3xl space-x-6 md:text-4xl font-bold mb-6 font-manrope">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 font-manrope">
             Get Paid in Seconds. Swipe Instantly.
           </h2>
           <p class="text-lg text-gray-700 mb-8 font-inter">
@@ -980,96 +1436,98 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="pricing" class="py-20 bg-lemly-light-grey">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-manrope">
-          One Powerful Plan.
-        </h2>
-        <p class="text-xl text-gray-700 font-inter">
-          Start free when we launch — no commitment.
-        </p>
-      </div>
+  <div id="pricing" class="scroll-section">
+    <div class="content">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 font-manrope">
+            One Powerful Plan.
+          </h2>
+          <p class="text-xl text-gray-700 font-inter">
+            Start free when we launch — no commitment.
+          </p>
+        </div>
 
-      <div class="max-w-4xl mx-auto">
-        <div class="pricing-card bg-white p-8 md:p-12">
-          <div class="flex flex-col md:flex-row gap-8">
-            <div class="md:w-1/3 text-center md:text-left">
-              <div class="text-5xl font-bold mb-2">
-                €25<span class="text-lg font-normal">/month</span>
+        <div class="max-w-4xl mx-auto">
+          <div class="pricing-card bg-white p-8 md:p-12">
+            <div class="flex flex-col md:flex-row gap-8">
+              <div class="md:w-1/3 text-center md:text-left">
+                <div class="text-5xl font-bold mb-2">
+                  €25<span class="text-lg font-normal">/month</span>
+                </div>
+                <div class="text-sm text-gray-600 mb-6">
+                  + 5% per transaction
+                </div>
+                <div class="bg-gray-100 text-lemly-dark px-4 py-2 rounded-full inline-block mb-8">
+                  Start free for 30 days
+                </div>
+                <button
+                  class="w-full md:w-auto bg-lemly-dark text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
+                  Get Early Access →
+                </button>
               </div>
-              <div class="text-sm text-gray-600 mb-6">
-                + 5% per transaction
-              </div>
-              <div class="bg-gray-100 text-lemly-dark px-4 py-2 rounded-full inline-block mb-8">
-                Start free for 30 days
-              </div>
-              <button
-                class="w-full md:w-auto bg-lemly-dark text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">
-                Get Early Access →
-              </button>
-            </div>
 
-            <div class="md:w-2/3">
-              <h3 class="text-xl font-bold mb-6">
-                Everything you need to run your business
-              </h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+              <div class="md:w-2/3">
+                <h3 class="text-xl font-bold mb-6">
+                  Everything you need to run your business
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Unlimited product cards & store visits</span>
                   </div>
-                  <span>Unlimited product cards & store visits</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Real-time basket creation</span>
                   </div>
-                  <span>Real-time basket creation</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Professional wallet with your own IBAN</span>
                   </div>
-                  <span>Professional wallet with your own IBAN</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Virtual Visa card</span>
                   </div>
-                  <span>Virtual Visa card</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Mobile wallet payments (Google/Samsung Pay)</span>
                   </div>
-                  <span>Mobile wallet payments (Google/Samsung Pay)</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Instant access to balance</span>
                   </div>
-                  <span>Instant access to balance</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Withdraw to any EU bank account</span>
                   </div>
-                  <span>Withdraw to any EU bank account</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Export orders for shipping</span>
                   </div>
-                  <span>Export orders for shipping</span>
-                </div>
-                <div class="flex items-start">
-                  <div class="mt-1 mr-3 text-green-500">
-                    <i class="fas fa-check-circle"></i>
+                  <div class="flex items-start">
+                    <div class="mt-1 mr-3 text-green-500">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span>Priority email support</span>
                   </div>
-                  <span>Priority email support</span>
                 </div>
               </div>
             </div>
@@ -1077,9 +1535,91 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- FAQ Section (new) -->
+  <section id="faq" class="faq-section py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-16 scroll-reveal">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-manrope">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-lg text-gray-700 font-inter">
+          Have questions? We have answers. Here are some of the most common
+          things we get asked.
+        </p>
+      </div>
+
+      <div class="faq-accordion-container">
+        <details class="faq-item scroll-reveal">
+          <summary>What exactly is Lemly?</summary>
+          <div class="faq-answer">
+            <p>
+              Lemly is a live commerce toolkit designed for personal shoppers
+              and streamers. It provides a floating widget that works over any
+              social media or chat app, allowing you to create product cards,
+              manage orders, and receive payments instantly without
+              interrupting your live stream.
+            </p>
+          </div>
+        </details>
+        <details class="faq-item scroll-reveal">
+          <summary>Who is Lemly for?</summary>
+          <div class="faq-answer">
+            <p>
+              Lemly is built for the modern entrepreneur who sells live. This
+              includes personal shoppers streaming from retail stores, content
+              creators unboxing products on TikTok or Instagram, and anyone
+              using live video to run a commerce business.
+            </p>
+          </div>
+        </details>
+        <details class="faq-item scroll-reveal">
+          <summary>
+            How is this better than just using DMs and PayPal?
+          </summary>
+          <div class="faq-answer">
+            <p>
+              Lemly streamlines the entire chaotic process. Instead of
+              managing dozens of direct messages, tracking who wants what, and
+              sending individual payment links, Lemly professionalizes your
+              workflow. It creates a seamless checkout experience for your
+              customers and ensures you get paid instantly, eliminating
+              payment friction and delays.
+            </p>
+          </div>
+        </details>
+        <details class="faq-item scroll-reveal">
+          <summary>What do my customers need to do to pay?</summary>
+          <div class="faq-answer">
+            <p>
+              Your customers get the simplest experience possible. They just
+              click a single link you share, which takes them to a clean
+              checkout page with their items already in the basket. They do
+              not need to download an app or create an account, which
+              significantly increases the likelihood of a completed purchase.
+            </p>
+          </div>
+        </details>
+        <details class="faq-item scroll-reveal">
+          <summary>
+            How does the instant payout work with the Lemly Card?
+          </summary>
+          <div class="faq-answer">
+            <p>
+              As soon as a customer's payment is successful, the funds are
+              immediately credited to your Lemly account balance. This balance
+              is directly linked to your Lemly Visa Card. You can then use the
+              card to spend the money instantly—online or in-store—without
+              ever needing to wait for a bank transfer.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
   </section>
 
-  <section class="py-20 bg-lemly-dark text-white">
+  <section class="py-20 bg-black text-white">
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-5xl mb-6 font-brutalist">
         Be First to Join the Lemly Partner Program
@@ -1100,6 +1640,7 @@
   </section>
 
   <footer class="py-12 bg-black text-white">
+    <div class="section-divider" style="height: 0.5px; margin-bottom: 4rem; width: 100%;"></div>
     <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
       <div class="flex flex-col md:flex-row justify-between items-center gap-8">
         <div>
@@ -1129,12 +1670,13 @@
         </div>
       </div>
 
-      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+      <div class="section-divider" style="height: 0.6px; margin-top: 2rem; width: 100%;"></div>
+      <div class="mt-7 pt-8 text-center text-sm">
         <p>© Lemly 2025. All rights reserved.</p>
       </div>
     </div>
   </footer>
-
+ 
   <script>
     // Sticky nav background change on scroll
     window.addEventListener("scroll", function () {
@@ -1144,6 +1686,10 @@
       } else {
         header.classList.remove("scrolled");
       }
+ 
+      const footer = document.querySelector('footer');
+      const footerTop = footer.getBoundingClientRect().top; 
+ 
     });
 
     // Simple email validation for demo
@@ -1162,6 +1708,75 @@
           }
         }
       });
+    });
+
+    // Xiaomi-style scrolling animation
+    document.addEventListener('DOMContentLoaded', function () {
+      const sections = document.querySelectorAll('.scroll-section'); 
+ 
+      // Scroll event listener
+      window.addEventListener('scroll', function () {
+        const scrollPosition = window.scrollY;
+
+        sections.forEach((section, index) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionBottom = sectionTop + sectionHeight;
+
+          // Check if section is in view
+          if (scrollPosition >= sectionTop - window.innerHeight * 0.3 &&
+            scrollPosition < sectionBottom - window.innerHeight * 0.3) {
+            section.classList.add('active');
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+          }
+        });
+      }); 
+    });
+
+    // Feature sections animation
+    document.addEventListener('DOMContentLoaded', function () {
+      const featureContainers = document.querySelectorAll('.feature-container');
+      const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+
+      // Function to check if element is in viewport
+      function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+          rect.bottom >= 0
+        );
+      }
+
+      // Function to handle scroll
+      function handleScroll() {
+        featureContainers.forEach(container => {
+          if (isInViewport(container)) {
+            container.classList.add('show');
+            container.querySelector('.feature-image').classList.add('show');
+            container.querySelector('.feature-content').classList.add('show');
+          }
+        });
+
+        scrollRevealElements.forEach(element => {
+          if (isInViewport(element)) {
+            element.classList.add('active');
+          }
+        });
+      }
+
+      // Initial check
+      handleScroll();
+
+      // Scroll event
+      window.addEventListener('scroll', handleScroll);
+    });
+
+    // Brand strip animation
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(() => {
+        document.querySelector('.brand-strip').style.animation = 'scroll 30s linear infinite';
+      }, 500);
     });
   </script>
 </body>
