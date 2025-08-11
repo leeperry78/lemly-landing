@@ -895,7 +895,6 @@
     .brand-strip-container h1 {
       font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 1rem;
       background: linear-gradient(to right, #fff, #aaa);
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -935,8 +934,16 @@
 
     .brand-strip {
       display: flex;
-      width: 200%;
+      align-items: center; /* keep logos vertically centered */
+      gap: 70px; /* unified spacing between items */
+      width: max-content; /* track equals natural content width */
+      will-change: transform; /* smoother GPU-accelerated scroll */
       animation: scroll 30s linear infinite;
+    }
+
+    /* Prevent items from shrinking which can crop images when object-fit kicks in */
+    .brand-strip > * {
+      flex: 0 0 auto;
     }
 
     .brand-item {
@@ -1062,19 +1069,41 @@
     .brand-strip img {
       height: 50px;
       width: auto;
-      margin-left: 70px;
-      object-fit: cover;
+      margin-left: 0; /* spacing now handled by flex gap */
+      object-fit: contain; /* show full logo without cropping */
       padding: 1px;
     }
 
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
+    /* Composite logo (e.g., Telegram icon + wordmark) should behave like one item */
+    .brand-strip .logo-composite {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 0; /* spacing handled by flex gap */
+      line-height: 0; /* remove inline whitespace */
+    }
 
-      100% {
-        transform: translateX(-50%);
-      }
+    /* Remove large inter-logo margin for images inside composite */
+    .brand-strip .logo-composite img {
+      margin-left: 0;
+      display: block; /* avoid descender gaps */
+      max-height: 50px; /* never exceed strip height */
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    /* Tune relative sizes so the pair feels like a single logo */
+    .brand-strip .logo-composite .tg-icon {
+      height: 34px; /* balanced with wordmark */
+    }
+
+    .brand-strip .logo-composite .tg-text {
+      height: 24px; /* wordmark usually shorter */
+      transform: translateY(1px); /* optical alignment */
+    }
+
+    @keyframes scroll {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
     }
 
     .footer {
@@ -1134,6 +1163,12 @@
       .brand-name {
         font-size: 0.95rem;
       }
+
+  /* Tighter spacing and slightly smaller logos for mobile to show more at once */
+  .brand-strip { gap: 40px; }
+  .brand-strip img { height: 44px; }
+  .brand-strip .logo-composite .tg-icon { height: 30px; }
+  .brand-strip .logo-composite .tg-text { height: 22px; }
     }
 
     @media (max-width: 576px) {
@@ -1143,11 +1178,11 @@
 
       .subtitle {
         font-size: 1rem;
-      }
+      } 
 
       .brand-item {
         width: 100px;
-        padding: 0.6rem;
+        padding: 0.6rem;  
       }
 
       .brand-icon {
@@ -1598,44 +1633,23 @@
     </div>
   </section>
   <center>
-    <div class="brand-strip-container">
+    <div style="position: relative; height: 60px; display: flex; justify-content: center; align-items: center;">
+      <div style="font-size: 14px; font-style: italic; padding: 8px 24px;" class="tracking-wide inline-block">
+        Go live anywhere. Sell everywhere
+      </div>
+    </div>
+    <div class="brand-strip-container" style="margin-top: 0;">
       <div class="gradient-overlay"></div>
       <div class="brand-strip">
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" />
-
-
-
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" />
-
-
-
-
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" />
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" />
-
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png" alt="YouTube" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Whatsapp_logo.svg/1280px-Whatsapp_logo.svg.png" alt="WhatsApp" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1600px-Instagram_logo.svg.png" alt="Instagram" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2880px-Facebook_logo_%282023%29.svg.png" alt="Facebook" />
+        <span class="logo-composite" aria-label="Telegram">
+          <img class="tg-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Telegram_X_2019_Logo.svg/1920px-Telegram_X_2019_Logo.svg.png" alt="Telegram icon" />
+          <img class="tg-text" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Telegram_text_logo.svg/340px-Telegram_text_logo.svg.png?20141210205135" alt="Telegram wordmark" />
+        </span>
       </div>
     </div>
   </center>
@@ -2443,11 +2457,41 @@
       window.addEventListener('scroll', handleScroll);
     });
 
-    // Brand strip animation
+    // Brand strip animation (mobile faster) + seamless loop duplication
     document.addEventListener('DOMContentLoaded', function () {
+      const strip = document.querySelector('.brand-strip');
+      if (!strip) return;
+
+      // Ensure there's exactly two sequences for seamless loop
+      const ensureDuplicated = () => {
+        const children = Array.from(strip.children);
+        // If already duplicated (more than 6-8 items expected), skip
+        if (children.length > 8) return;
+        const clone = strip.cloneNode(true);
+        // Move cloned children, not the strip wrapper
+        while (clone.firstChild) {
+          strip.appendChild(clone.firstChild);
+        }
+      };
+
+      const applyBrandStripSpeed = () => {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) {
+          strip.style.animation = 'none';
+          return;
+        }
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const duration = isMobile ? 12 : 30; // faster on mobile
+        strip.style.animation = `scroll ${duration}s linear infinite`;
+      };
+
+      // Initialize
       setTimeout(() => {
-        document.querySelector('.brand-strip').style.animation = 'scroll 30s linear infinite';
-      }, 500);
+        ensureDuplicated();
+        applyBrandStripSpeed();
+      }, 200);
+
+      window.addEventListener('resize', applyBrandStripSpeed);
     });
 
     // Add parallax mouse movement effect for hero section
